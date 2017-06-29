@@ -21,29 +21,18 @@ declaration
 = VAR id:ID EQUAL OBJECT SEMICOLON {objectName = id.trim();}
 
 statements
-= ob:ID DOT atr:ID EQUAL nom:STRING SEMICOLON{
+= ob:ID DOT atr:ID EQUAL elmnt:element SEMICOLON{
   if(ob != objectName)
     return "ERROR! Object not declared."
 
   else
-    return `"${atr.trim()}":${nom}`
+    return `"${atr.trim()}":${elmnt}`
 }
 
-/ ob:ID DOT atr:ID EQUAL num:NUMBER SEMICOLON{
-  if(ob != objectName)
-    return "ERROR! Object not declared."
-
-  else
-    return `"${atr.trim()}":${num}`
-}
-
-/ ob:ID DOT atr:ID EQUAL a:array {
-  if(ob != objectName)
-    return "ERROR! Object not declared."
-
-  else
-    return `"${atr.trim()}":${a}`
-}
+element
+= array
+/ STRING
+/ NUMBER
 
 array
 = LEFT_COR s:STRING st:array_final_st{
@@ -63,7 +52,7 @@ array_final_st
     return `, ${s}` + st;
 }
 
-/ RIGHT_COR SEMICOLON{
+/ RIGHT_COR{
     return `]`;
 }
 
