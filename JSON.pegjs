@@ -23,7 +23,7 @@ declaration
 statements
 = ob:ID DOT atr:ID EQUAL elmnt:element SEMICOLON{
   if(ob != objectName)
-    return "ERROR! Object not declared."
+    throw "ERROR! Object not declared."
 
   else
     return `"${atr.trim()}":${elmnt}`
